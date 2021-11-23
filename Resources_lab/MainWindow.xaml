@@ -1,0 +1,64 @@
+﻿<Window x:Class="Resources_lab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Resources_lab"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="OpenExecuted" />
+        <CommandBinding Command="Save" Executed="SaveExecuted"/>
+        <CommandBinding Command="Close" Executed="CloseExecuted"/>
+    </Window.CommandBindings>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Padding="5">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="Open"/>
+                <MenuItem Header="Сохранить" Command="Save"/>
+                <Separator/>
+                <MenuItem Header="Выход" Command="Close"/>
+            </MenuItem>
+            <MenuItem Header="Правка">
+                <MenuItem Header="Копировать" Command="Copy"/>
+                <MenuItem Header="Вырезать" Command="Cut"/>
+                <MenuItem Header="Вставить" Command="Paste"/>
+            </MenuItem>
+
+        </Menu>
+        <ToolBarTray Grid.Row="1">
+            <ToolBar Height="50">
+                <ComboBox ItemsSource="{StaticResource fonts}" Margin="5" Padding="5" SelectedIndex="0" Height="Auto" Width="150" SelectionChanged="ComboBox_SelectionChanged"/>
+                <ComboBox ItemsSource="{StaticResource fontsSizes}" Margin="5" Padding="5" SelectedIndex="2" Width="50" SelectionChanged="ComboBox_SelectionChanged_1"/>
+            </ToolBar>
+            <ToolBar Height="50" Margin="5" Padding="5">
+                <Button Command="EditingCommands.ToggleBold">
+                    <Image Source="img/material_bold_24.png"/>
+                </Button>
+                <Separator/>
+                <Button Command="EditingCommands.ToggleItalic">
+                    <Image Source="img/material_italic_24.png"/>
+                </Button>
+                <Separator/>
+                <Button Command="EditingCommands.ToggleUnderline">
+                    <Image Source="img/material_underline_24.png"/>
+                </Button>
+                <Separator/>
+            </ToolBar>
+            <ToolBar Height="50" Margin="5" Padding="5" >
+                <StackPanel VerticalAlignment="Center">
+                    <RadioButton x:Name="btn_black" Content="Черный" IsChecked="True" Checked="btn_black_Checked"/>
+                    <RadioButton x:Name="btn_blue" Content="Синий" Checked="btn_blue_Checked" />
+                </StackPanel>
+            </ToolBar>
+        </ToolBarTray>
+        <RichTextBox x:Name="rTB" Grid.Row="2" Margin="5" Padding="5" FontFamily="Arial" FontSize="14" Block.LineHeight="5">
+            <FlowDocument/>
+        </RichTextBox>
+    </Grid>
+</Window>
